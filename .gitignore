@@ -1,0 +1,7 @@
+/.idea/
+*.iml
+.env
+.DS_Store
+
+/target/
+/.git-versioned-pom.xml

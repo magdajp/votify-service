@@ -1,0 +1,37 @@
+databaseChangeLog:
+  - changeSet:
+      id: 001-create-users-table
+      author: dev
+      changes:
+        - sqlFile:
+            path: db/changelog/1-0-0/001-create-users-table.sql
+  - changeSet:
+      id: 002-create-housing-community-table
+      author: dev
+      changes:
+        - sqlFile:
+            path: db/changelog/1-0-0/002-create-housing-community-table.sql
+  - changeSet:
+      id: 003-create-residents-table
+      author: dev
+      changes:
+        - sqlFile:
+            path: db/changelog/1-0-0/003-create-residents-table.sql
+  - changeSet:
+      id: 004-create-resolutions-table
+      author: dev
+      changes:
+        - sqlFile:
+            path: db/changelog/1-0-0/004-create-resolutions-table.sql
+  - changeSet:
+      id: 005-create-voting-table
+      author: dev
+      changes:
+        - sqlFile:
+            path: db/changelog/1-0-0/005-create-voting-table.sql
+  - changeSet:
+      id: 006-create-audit_log-table
+      author: dev
+      changes:
+        - sqlFile:
+            path: db/changelog/1-0-0/006-create-audit_log-table.sql
