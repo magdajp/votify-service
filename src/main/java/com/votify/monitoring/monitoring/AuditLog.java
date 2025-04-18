@@ -17,6 +17,7 @@ import java.util.Map;
 @RequiredArgsConstructor(access = AccessLevel.PACKAGE)
 class AuditLog {
     private static final Logger LOGGER = LoggerFactory.getLogger(AuditLog.class);
+
     private final NamedParameterJdbcTemplate jdbcTemplate;
     private static final String ADD_AUDIT_LOG_ENTRY_QUERY = """
             INSERT INTO auditlog(payload, timestamp) VALUES (:payload, :timestamp)
