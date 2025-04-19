@@ -6,4 +6,4 @@ CREATE TABLE IF NOT EXISTS housing_communities
     owner_id  UUID      NOT NULL,
     timestamp TIMESTAMP NOT NULL DEFAULT now(),
     FOREIGN KEY (owner_id) REFERENCES users (id)
-);
+)

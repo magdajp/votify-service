@@ -35,3 +35,15 @@ databaseChangeLog:
       changes:
         - sqlFile:
             path: db/changelog/1-0-0/006-create-audit_log-table.sql
+  - changeSet:
+      id: 007-create-housing-community-with-residents-view
+      author: dev
+      changes:
+        - sqlFile:
+            path: db/changelog/1-0-0/007-create-housing-community-with-residents-view.sql
+  - changeSet:
+      id: 100-add-test-data
+      author: dev
+      changes:
+        - sqlFile:
+            path: db/changelog/1-0-0/100-add-test-data.sql

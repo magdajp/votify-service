@@ -3,6 +3,8 @@ package com.votify.housingcommunity.create;
 import com.votify.security.UserIdProvider;
 import com.votify.shared.entrypoint.FailureResponse;
 import com.votify.shared.entrypoint.SuccessResponse;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,7 +25,7 @@ public class HousingCommunityEntrypoint {
     private final FetchHousingCommunity fetchHousingCommunity;
 
     @PostMapping("/create")
-    public ResponseEntity<Object> createCommunity(@RequestBody CreateCommunityRequest request) {
+    public ResponseEntity<Object> createCommunity(@Valid @RequestBody CreateCommunityRequest request) {
         return createHousingCommunity.createHousingCommunity(request.toCommand(userIdProvider.userId()))
                 .mapSuccess(HousingCommunityCreated::communityId)
                 .get(SuccessResponse::created, FailureResponse::of);
@@ -36,7 +38,10 @@ public class HousingCommunityEntrypoint {
                 .toList();
     }
 
-    public record CreateCommunityRequest(String name, String location) {
+    public record CreateCommunityRequest(
+            @NotNull(message = "Name is required") String name,
+            @NotNull(message = "Location is required") String location
+    ) {
 
         private CreateHousingCommunity.Command toCommand(UUID userId) {
             return CreateHousingCommunity.Command

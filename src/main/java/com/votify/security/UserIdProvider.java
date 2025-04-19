@@ -13,6 +13,6 @@ public class UserIdProvider {
 
     //TODO: to replace with JWT
     public UUID userId() {
-        return userRepository.findByEmail("jan.dzban@gmail.com").orElseThrow().id();
+        return userRepository.findByEmail("peter.griffin@quahog.com").orElseThrow().id();
     }
 }

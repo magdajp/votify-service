@@ -12,7 +12,7 @@ import java.util.UUID;
 
 import static java.util.UUID.randomUUID;
 
-@Entity
+@Entity(name = "CreateHousingCommunityHousingCommunityEntity")
 @Table(name = "housing_communities")
 @NoArgsConstructor
 @Setter
