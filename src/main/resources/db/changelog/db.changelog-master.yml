@@ -47,6 +47,16 @@ databaseChangeLog:
       changes:
         - sqlFile:
             path: db/changelog/1-0-0/008-create-resident-resolutions-view.sql
+            splitStatements: false
+            endDelimiter: $$
+  - changeSet:
+      id: 009-create-community-resolutions-view
+      author: dev
+      changes:
+        - sqlFile:
+            path: db/changelog/1-0-0/009-create-community-resolutions-view.sql
+            splitStatements: false
+            endDelimiter: $$
   - changeSet:
       id: 100-add-test-data
       author: dev

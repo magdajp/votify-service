@@ -47,11 +47,11 @@ VALUES ('c708ee2a-5b19-4cf8-ab3d-bbbc923ad444', '4c2d099b-d134-48fa-b054-4814d2f
        ('c708ee2a-5b19-4cf8-ab3d-bbbc923ad321', '4c2d099b-d134-48fa-b054-4814d2f1c111');
 
 INSERT INTO resolutions(id, housing_community_id, title, content, deadline, quorum, deleted)
-VALUES  ('c991e197-d918-4f02-bd00-9a66c69d1555', '4c2d099b-d134-48fa-b054-4814d2f1c111', 'Atal - Uchwala numer 1', 'Tresc uchwaly numer 1', '2025-01-10 23:59:00', 3, FALSE),
-        ('c991e197-d918-4f02-bd00-9a66c69d1666', '4c2d099b-d134-48fa-b054-4814d2f1c111', 'Atal - Uchwala numer 2', 'Tresc uchwaly numer 2', '2025-02-10 23:59:00', 3, FALSE),
-        ('c991e197-d918-4f02-bd00-9a66c69d1777', '4c2d099b-d134-48fa-b054-4814d2f1c111', 'Atal - Uchwala numer 3', 'Tresc uchwaly numer 3', '2025-03-30 23:59:00', 3, FALSE),
-        ('c991e197-d918-4f02-bd00-9a66c69d1888', '4c2d099b-d134-48fa-b054-4814d2f1c111', 'Atal - Uchwala numer 4', 'Tresc uchwaly numer 4', '2026-07-30 23:59:00', 3, TRUE),
-        ('c991e197-d918-4f02-bd00-9a66c69d1444', '4c2d099b-d134-48fa-b054-4814d2f1c111', 'Atal - Uchwala numer 5', 'Tresc uchwaly numer 5', '2026-07-30 23:59:00', 3, FALSE),
+VALUES  ('c991e197-d918-4f02-bd00-9a66c69d1555', '4c2d099b-d134-48fa-b054-4814d2f1c111', 'Atal - Uchwala numer 1', 'Tresc uchwaly numer 1', '2025-01-10 23:59:00', 7, FALSE),
+        ('c991e197-d918-4f02-bd00-9a66c69d1666', '4c2d099b-d134-48fa-b054-4814d2f1c111', 'Atal - Uchwala numer 2', 'Tresc uchwaly numer 2', '2025-02-10 23:59:00', 7, FALSE),
+        ('c991e197-d918-4f02-bd00-9a66c69d1777', '4c2d099b-d134-48fa-b054-4814d2f1c111', 'Atal - Uchwala numer 3', 'Tresc uchwaly numer 3', '2025-03-30 23:59:00', 7, FALSE),
+        ('c991e197-d918-4f02-bd00-9a66c69d1888', '4c2d099b-d134-48fa-b054-4814d2f1c111', 'Atal - Uchwala numer 4', 'Tresc uchwaly numer 4', '2026-07-30 23:59:00', 7, TRUE),
+        ('c991e197-d918-4f02-bd00-9a66c69d1444', '4c2d099b-d134-48fa-b054-4814d2f1c111', 'Atal - Uchwala numer 5', 'Tresc uchwaly numer 5', '2026-07-30 23:59:00', 7, FALSE),
         ('c991e197-d918-4f02-bd00-9a66c69d1999', '4c2d099b-d134-48fa-b054-4814d2f1c333', 'Psie Pole - Uchwala numer 1', 'Tresc uchwaly numer 1', '2025-03-10 23:59:00', 5, FALSE),
         ('c991e197-d918-4f02-bd00-9a66c69d1000', '4c2d099b-d134-48fa-b054-4814d2f1c333', 'Psie Pole - Uchwala numer 2', 'Tresc uchwaly numer 2', '2025-06-30 23:59:00', 5, FALSE);
 
@@ -59,8 +59,13 @@ INSERT INTO votes(resolution_id, resident_id, vote)
 VALUES ('c991e197-d918-4f02-bd00-9a66c69d1555', 'c708ee2a-5b19-4cf8-ab3d-bbbc923ad444', 'IN_FAVOR'),
        ('c991e197-d918-4f02-bd00-9a66c69d1555', 'c708ee2a-5b19-4cf8-ab3d-bbbc923ad555', 'IN_FAVOR'),
        ('c991e197-d918-4f02-bd00-9a66c69d1555', 'c708ee2a-5b19-4cf8-ab3d-bbbc923ad666', 'IN_FAVOR'),
-       ('c991e197-d918-4f02-bd00-9a66c69d1555', 'c708ee2a-5b19-4cf8-ab3d-bbbc923ad777', 'AGAINST'),
-       ('c991e197-d918-4f02-bd00-9a66c69d1555', 'c708ee2a-5b19-4cf8-ab3d-bbbc923ad888', 'AGAINST'),
+       ('c991e197-d918-4f02-bd00-9a66c69d1555', 'c708ee2a-5b19-4cf8-ab3d-bbbc923ad777', 'IN_FAVOR'),
+       ('c991e197-d918-4f02-bd00-9a66c69d1555', 'c708ee2a-5b19-4cf8-ab3d-bbbc923ad888', 'IN_FAVOR'),
+       ('c991e197-d918-4f02-bd00-9a66c69d1555', 'c708ee2a-5b19-4cf8-ab3d-bbbc923ad999', 'IN_FAVOR'),
+       ('c991e197-d918-4f02-bd00-9a66c69d1555', 'c708ee2a-5b19-4cf8-ab3d-bbbc923adaaa', 'IN_FAVOR'),
+       ('c991e197-d918-4f02-bd00-9a66c69d1555', 'c708ee2a-5b19-4cf8-ab3d-bbbc923adfff', 'AGAINST'),
+       ('c991e197-d918-4f02-bd00-9a66c69d1555', 'c708ee2a-5b19-4cf8-ab3d-bbbc923ae999', 'AGAINST'),
+       ('c991e197-d918-4f02-bd00-9a66c69d1555', 'c708ee2a-5b19-4cf8-ab3d-bbbc923ad000', 'AGAINST'),
 
        ('c991e197-d918-4f02-bd00-9a66c69d1666', 'c708ee2a-5b19-4cf8-ab3d-bbbc923ad444', 'IN_FAVOR'),
        ('c991e197-d918-4f02-bd00-9a66c69d1666', 'c708ee2a-5b19-4cf8-ab3d-bbbc923ad555', 'IN_FAVOR'),
@@ -80,11 +85,13 @@ VALUES ('c991e197-d918-4f02-bd00-9a66c69d1555', 'c708ee2a-5b19-4cf8-ab3d-bbbc923
        ('c991e197-d918-4f02-bd00-9a66c69d1888', 'c708ee2a-5b19-4cf8-ab3d-bbbc923ad777', 'IN_FAVOR'),
        ('c991e197-d918-4f02-bd00-9a66c69d1888', 'c708ee2a-5b19-4cf8-ab3d-bbbc923ad888', 'IN_FAVOR'),
 
-
        ('c991e197-d918-4f02-bd00-9a66c69d1444', 'c708ee2a-5b19-4cf8-ab3d-bbbc923ad444', 'IN_FAVOR'),
        ('c991e197-d918-4f02-bd00-9a66c69d1444', 'c708ee2a-5b19-4cf8-ab3d-bbbc923ad555', 'IN_FAVOR'),
        ('c991e197-d918-4f02-bd00-9a66c69d1444', 'c708ee2a-5b19-4cf8-ab3d-bbbc923ad666', 'IN_FAVOR'),
        ('c991e197-d918-4f02-bd00-9a66c69d1444', 'c708ee2a-5b19-4cf8-ab3d-bbbc923ad777', 'IN_FAVOR'),
-       ('c991e197-d918-4f02-bd00-9a66c69d1444', 'c708ee2a-5b19-4cf8-ab3d-bbbc923ad888', 'AGAINST'),
-       ('c991e197-d918-4f02-bd00-9a66c69d1444', 'c708ee2a-5b19-4cf8-ab3d-bbbc923ad999', 'AGAINST'),
-       ('c991e197-d918-4f02-bd00-9a66c69d1444', 'c708ee2a-5b19-4cf8-ab3d-bbbc923adaaa', 'AGAINST');
+       ('c991e197-d918-4f02-bd00-9a66c69d1444', 'c708ee2a-5b19-4cf8-ab3d-bbbc923ad888', 'IN_FAVOR'),
+       ('c991e197-d918-4f02-bd00-9a66c69d1444', 'c708ee2a-5b19-4cf8-ab3d-bbbc923ad999', 'IN_FAVOR'),
+       ('c991e197-d918-4f02-bd00-9a66c69d1444', 'c708ee2a-5b19-4cf8-ab3d-bbbc923adaaa', 'IN_FAVOR'),
+       ('c991e197-d918-4f02-bd00-9a66c69d1444', 'c708ee2a-5b19-4cf8-ab3d-bbbc923adfff', 'IN_FAVOR'),
+       ('c991e197-d918-4f02-bd00-9a66c69d1444', 'c708ee2a-5b19-4cf8-ab3d-bbbc923ae999', 'AGAINST'),
+       ('c991e197-d918-4f02-bd00-9a66c69d1444', 'c708ee2a-5b19-4cf8-ab3d-bbbc923ad000', 'AGAINST');
