@@ -37,7 +37,7 @@ class HousingCommunityRepository {
             """;
 
     private static final String ADD_USER_QUERY = """
-            INSERT INTO users (id, first_name, last_name, email) VALUES (:id, :firstName, :lastName, :email)
+            INSERT INTO users (id, first_name, last_name, email, password) VALUES (:id, :firstName, :lastName, :email, :password)
             """;
     private static final String UPDATE_COMMUNITY_QUERY = """
             INSERT INTO residents (user_id, housing_community_id) VALUES (:userId, :housingCommunityId)
@@ -52,7 +52,8 @@ class HousingCommunityRepository {
                         "id", event.user().id(),
                         "firstName", event.user().firstName(),
                         "lastName", event.user().lastName(),
-                        "email", event.user().email().value()
+                        "email", event.user().email().value(),
+                        "password", event.user().password()
                 )
         );
 

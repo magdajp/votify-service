@@ -5,23 +5,29 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.stereotype.Component;
 
+import javax.crypto.SecretKey;
+import java.time.Instant;
+import java.util.Date;
+
+import static java.time.temporal.ChronoUnit.DAYS;
+
 @Component
 public class JwtUtil {
-    private final String secret = "tajnySekretJWT"; // Lepszy: w pliku .env
-    private final long expiration = 86400000; // 1 dzień
+    private static final SecretKey SECRET_KEY = Keys.secretKeyFor(SignatureAlgorithm.HS256);
 
-    public String generateToken(String username) {
+    public String generateToken(String userEmail) {
+        var now = Instant.now();
         return Jwts.builder()
-                .setSubject(username)
-                .setIssuedAt(new Date())
-                .setExpiration(new Date(System.currentTimeMillis() + expiration))
-                .signWith(Keys.hmacShaKeyFor(secret.getBytes()), SignatureAlgorithm.HS256)
+                .setSubject(userEmail)
+                .setIssuedAt(Date.from(now))
+                .setExpiration(Date.from(now.plus(1, DAYS)))
+                .signWith(SECRET_KEY)
                 .compact();
     }
 
     public String extractUsername(String token) {
         return Jwts.parserBuilder()
-                .setSigningKey(secret.getBytes())
+                .setSigningKey(SECRET_KEY)
                 .build()
                 .parseClaimsJws(token)
                 .getBody()

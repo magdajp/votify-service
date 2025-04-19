@@ -34,7 +34,8 @@ public class ResidentEntrypoint {
     public record AddResidentRequest(
             @NotNull(message = "User first name is required") String userFirstName,
             @NotNull(message = "User last name is required") String userLastName,
-            @NotNull(message = "User email is required") String userEmail) {
+            @NotNull(message = "User email is required") String userEmail,
+            @NotNull(message = "User password is required") String password) {
 
         private AddResidentToHousingCommunity.AddUserCommand toCommand(UUID communityId, UUID userId) {
             return AddResidentToHousingCommunity.AddUserCommand
@@ -43,6 +44,7 @@ public class ResidentEntrypoint {
                     .userLastName(userLastName)
                     .userEmail(userEmail)
                     .communityId(communityId)
+                    .password(password)
                     .byWho(userId)
                     .build();
         }
