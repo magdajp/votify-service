@@ -1,4 +1,4 @@
-package com.votify.monitoring.monitoring;
+package com.votify.monitoring;
 
 import com.votify.shared.event.Event;
 import jakarta.transaction.Transactional;
