@@ -42,6 +42,12 @@ databaseChangeLog:
         - sqlFile:
             path: db/changelog/1-0-0/007-create-housing-community-with-residents-view.sql
   - changeSet:
+      id: 008-create-housing-community-with-residents-view
+      author: dev
+      changes:
+        - sqlFile:
+            path: db/changelog/1-0-0/008-create-resident-resolutions-view.sql
+  - changeSet:
       id: 100-add-test-data
       author: dev
       changes:
