@@ -1,4 +1,4 @@
-package com.votify.resident;
+package com.votify.housingcommunity.addresident;
 
 import com.votify.security.UserIdProvider;
 import com.votify.shared.entrypoint.FailureResponse;

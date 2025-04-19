@@ -1,4 +1,4 @@
-package com.votify.resident;
+package com.votify.housingcommunity.addresident;
 
 import com.goodcode.online.result.Result;
 import com.votify.shared.Email;
@@ -38,7 +38,7 @@ class HousingCommunity {
     }
 
     private Failure userHasNoPermissionToAddResident(UUID residentId, UUID byWho) {
-        return () -> "User[%s] has no permission to add resident[%s] to community[%s]".formatted(ownerId, residentId, byWho);
+        return () -> "User[%s] has no permission to add resident[%s] to community[%s]".formatted(byWho, residentId, id);
     }
 
     private Failure userIsAlreadyAddedToCommunity(UUID userId, UUID communityId) {

@@ -1,6 +1,5 @@
-package com.votify.housingcommunity;
+package com.votify.housingcommunity.create;
 
-import com.votify.housingcommunity.events.HousingCommunityAdded;
 import com.votify.security.UserIdProvider;
 import com.votify.shared.entrypoint.FailureResponse;
 import com.votify.shared.entrypoint.SuccessResponse;
@@ -20,27 +19,27 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class HousingCommunityEntrypoint {
     private final UserIdProvider userIdProvider;
-    private final AddHousingCommunity addHousingCommunity;
+    private final CreateHousingCommunity createHousingCommunity;
     private final FetchHousingCommunity fetchHousingCommunity;
 
-    @PostMapping("/add")
-    public ResponseEntity<Object> addCommunity(@RequestBody AddCommunityRequest request) {
-        return addHousingCommunity.addHousingCommunity(request.toCommand(userIdProvider.userId()))
-                .mapSuccess(HousingCommunityAdded::communityId)
+    @PostMapping("/create")
+    public ResponseEntity<Object> createCommunity(@RequestBody CreateCommunityRequest request) {
+        return createHousingCommunity.createHousingCommunity(request.toCommand(userIdProvider.userId()))
+                .mapSuccess(HousingCommunityCreated::communityId)
                 .get(SuccessResponse::created, FailureResponse::of);
     }
 
     @GetMapping("/all")
-    public List<HousingCommunityDto> getAll() {
+    public List<HousingCommunityDto> fetchAll() {
         return fetchHousingCommunity.fetchAll().stream()
                 .map(this::toDto)
                 .toList();
     }
 
-    public record AddCommunityRequest(String name, String location) {
+    public record CreateCommunityRequest(String name, String location) {
 
-        private AddHousingCommunity.Command toCommand(UUID userId) {
-            return AddHousingCommunity.Command
+        private CreateHousingCommunity.Command toCommand(UUID userId) {
+            return CreateHousingCommunity.Command
                     .builder()
                     .name(name)
                     .location(location)

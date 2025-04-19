@@ -1,7 +1,7 @@
-package com.votify.resident;
+package com.votify.housingcommunity.addresident;
 
 import com.goodcode.online.result.Result;
-import com.votify.resident.HousingCommunity.UserAddedToHousingCommunity;
+import com.votify.housingcommunity.addresident.HousingCommunity.UserAddedToHousingCommunity;
 import com.votify.shared.event.EventPublisher;
 import com.votify.shared.result.Failure;
 import lombok.AccessLevel;
@@ -19,7 +19,7 @@ import java.util.UUID;
 class AddResidentToHousingCommunity {
     private static final Logger LOGGER = LoggerFactory.getLogger(AddResidentToHousingCommunity.class);
 
-    @Qualifier("residentAddToCommunityHousingCommunityRepo")
+    @Qualifier("addResidentToCommunityHousingCommunityRepo")
     private final HousingCommunityRepository housingCommunityRepository;
     private final EventPublisher eventPublisher;
 

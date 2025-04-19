@@ -1,4 +1,4 @@
-package com.votify.resident;
+package com.votify.housingcommunity.addresident;
 
 import com.goodcode.online.result.Result;
 import com.votify.shared.Email;
@@ -22,7 +22,7 @@ import java.util.stream.Collectors;
 import static java.util.Optional.ofNullable;
 
 @RequiredArgsConstructor(access = AccessLevel.PACKAGE)
-@Repository("residentAddToCommunityHousingCommunityRepo")
+@Repository("addResidentToCommunityHousingCommunityRepo")
 class HousingCommunityRepository {
     private static final String FETCH_COMMUNITY_BY_ID_QUERY = """
             SELECT id, owner_id as ownerId

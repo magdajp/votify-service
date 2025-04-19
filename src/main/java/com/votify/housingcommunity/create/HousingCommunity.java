@@ -1,4 +1,4 @@
-package com.votify.housingcommunity;
+package com.votify.housingcommunity.create;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

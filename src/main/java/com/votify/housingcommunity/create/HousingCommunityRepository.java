@@ -1,4 +1,4 @@
-package com.votify.housingcommunity;
+package com.votify.housingcommunity.create;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
