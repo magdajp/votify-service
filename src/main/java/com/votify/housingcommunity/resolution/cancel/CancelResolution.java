@@ -27,7 +27,7 @@ class CancelResolution {
                 .flatSuccess(resolution -> resolution.cancel(byWho))
                 .ifSuccess(event -> resolutionRepository.save(event.resolution()))
                 .ifSuccess(eventPublisher::publish)
-                .ifFailure(failure -> LOGGER.error("Failed to cancel resolution[%s] by [%s]: %s".formatted(resolutionId, byWho, failure.message())));
+                .ifFailure(failure -> LOGGER.error("Failed to cancel resolution[{}] by [{}]: {}", resolutionId, byWho, failure.message()));
     }
 
 }

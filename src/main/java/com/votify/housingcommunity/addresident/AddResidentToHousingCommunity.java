@@ -28,7 +28,7 @@ class AddResidentToHousingCommunity {
                 .flatSuccess(community -> community.addResident(new User(command.userEmail, command.userFirstName, command.userLastName), command.byWho))
                 .ifSuccess(housingCommunityRepository::persist)
                 .ifSuccess(eventPublisher::publish)
-                .ifFailure(failure -> LOGGER.error("Failed to add resident[%s] to community[%s]: %s".formatted(command.userEmail, command.communityId, failure.message())));
+                .ifFailure(failure -> LOGGER.error("Failed to add resident[{}] to community[{}]: {}", command.userEmail, command.communityId, failure.message()));
     }
 
     @Builder

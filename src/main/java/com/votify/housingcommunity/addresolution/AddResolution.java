@@ -30,7 +30,7 @@ class AddResolution {
                 .flatSuccess(community -> community.addResolution(command, clock))
                 .ifSuccess(event -> resolutionRepository.save(event.resolution()))
                 .ifSuccess(eventPublisher::publish)
-                .ifFailure(failure -> LOGGER.error("Failed to add resolution[%s] to community[%s]: %s".formatted(command.title(), command.communityId(), failure.message())));
+                .ifFailure(failure -> LOGGER.error("Failed to add resolution[{}] to community[{}]: {}" ,command.title(), command.communityId(), failure.message()));
     }
 
 }
