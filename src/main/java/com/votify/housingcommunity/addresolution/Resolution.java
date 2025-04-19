@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-@Entity
+@Entity(name = "addResolutionResolutionEntity")
 @Table(name = "resolutions")
 @NoArgsConstructor
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
@@ -24,8 +24,8 @@ class Resolution {
     @Id
     @GeneratedValue
     private UUID id;
-    @Column
-    private UUID housingCommunityId;
+    @Column(name = "housing_community_id")
+    private UUID communityId;
     @Column
     private String title;
     @Column

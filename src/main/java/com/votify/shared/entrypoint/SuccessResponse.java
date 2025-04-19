@@ -11,4 +11,8 @@ public class SuccessResponse {
     public static ResponseEntity<Object> created(Object body) {
         return ResponseEntity.status(CREATED).body(body);
     }
+
+    public static ResponseEntity<Object> empty() {
+        return ResponseEntity.ok().build();
+    }
 }

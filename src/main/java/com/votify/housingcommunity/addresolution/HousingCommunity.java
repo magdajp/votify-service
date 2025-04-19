@@ -41,7 +41,7 @@ class HousingCommunity {
         }
 
         var resolution = Resolution.builder()
-                .housingCommunityId(id)
+                .communityId(id)
                 .title(command.title)
                 .content(command.content)
                 .quorum(quorum(command.minQuorumInPercentage))
