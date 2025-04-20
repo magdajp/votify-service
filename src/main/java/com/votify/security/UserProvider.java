@@ -30,11 +30,12 @@ public class UserProvider {
     }
 
     private LoggedUser toUser(User user) {
-        var community = communityRepository.findByOwnerId(user.id());
+        var community = communityRepository.findCommunity(user.id()).orElseThrow();
         return LoggedUser.builder()
                 .id(user.id())
                 .email(user.email())
-                .community(community.name())
+                .communityId(community.id())
+                .communityName(community.name())
                 .role(community.roleInCommunity(user.id()))
                 .build();
     }
