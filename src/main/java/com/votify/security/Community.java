@@ -12,24 +12,23 @@ import lombok.NoArgsConstructor;
 import java.util.UUID;
 
 @Entity
-@Table(name = "users")
+@Table(name = "housing_communities")
 @NoArgsConstructor
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Getter
-class User {
+class Community {
     @Id
-    @Column
     private UUID id;
     @Column
-    private String email;
+    private String name;
     @Column
-    private String password;
-    @Column
-    private String firstName;
-    @Column
-    private String lastName;
+    private UUID ownerId;
 
-    static User newUser(String email, String password, String firstName, String lastName) {
-        return new User(UUID.randomUUID(), email, password, firstName, lastName);
+    Role roleInCommunity(UUID user) {
+        return doesUserOwnCommunity(user) ? Role.ADMIN : Role.RESIDENT;
+    }
+
+    boolean doesUserOwnCommunity(UUID user) {
+        return ownerId.equals(user);
     }
 }

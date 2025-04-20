@@ -1,6 +1,9 @@
 package com.votify.security;
 
+import lombok.Builder;
+
 import java.util.UUID;
 
-public record LoggedUser(UUID id, Role role) {
+@Builder
+public record LoggedUser(UUID id, String email, Role role, String community) {
 }
