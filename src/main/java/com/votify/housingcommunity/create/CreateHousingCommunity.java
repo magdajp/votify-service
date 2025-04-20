@@ -1,11 +1,13 @@
 package com.votify.housingcommunity.create;
 
 import com.goodcode.online.result.Result;
+import com.votify.security.UserCreated;
 import com.votify.shared.event.EventPublisher;
 import com.votify.shared.result.Failure;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;
@@ -23,6 +25,11 @@ class CreateHousingCommunity {
         var event = new HousingCommunityCreated(community.id(), community.name(), community.ownerId());
         eventPublisher.publish(event);
         return Result.success(event);
+    }
+
+    @EventListener
+    void on(UserCreated event) {
+        createHousingCommunity(new Command(event.communityName(), event.communityLocation(), event.userId()));
     }
 
     @Builder
