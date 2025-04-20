@@ -11,6 +11,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.UUID;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor(access = AccessLevel.PACKAGE)
@@ -21,10 +23,23 @@ class FetchResolutions {
     private final ResolutionRepository resolutionRepository;
     @Qualifier("queryFetchResolutionForResidentResidentRepo")
     private final ResidentRepository residentRepository;
+    @Qualifier("queryFetchResolutionForResidentVoteRepo")
+    private final VoteRepository voteRepository;
 
     Result<List<Resolution>, Failure> fetchResidentsResolutions(UUID resident) {
         return residentRepository.fetchResidentCommunityId(resident)
                 .mapSuccess(resolutionRepository::findAllByCommunityId)
-                .ifFailure(failure -> LOGGER.error("Failed to fetch resident's[{}] resolutions: {}",resident, failure.message()));
+                .mapSuccess(resolutions -> enhanceByResidentVotes(resolutions, resident))
+                .ifFailure(failure -> LOGGER.error("Failed to fetch resident's[{}] resolutions: {}", resident, failure.message()));
+    }
+
+    private List<Resolution> enhanceByResidentVotes(List<Resolution> resolutions, UUID resident) {
+        var resolutionById = resolutions.stream()
+                .collect(Collectors.toMap(Resolution::getId, Function.identity()));
+        var voteByResolutionId = voteRepository.findAllByResidentId(resident)
+                .stream()
+                .collect(Collectors.toMap(Vote::resolutionId, Function.identity()));
+        voteByResolutionId.forEach((resolutionId, vote) -> resolutionById.get(resolutionId).addVoteOption(vote.vote()));
+        return resolutions;
     }
 }
