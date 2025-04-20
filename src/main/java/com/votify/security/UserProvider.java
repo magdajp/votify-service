@@ -12,15 +12,19 @@ import static java.util.Optional.ofNullable;
 
 @Service
 @RequiredArgsConstructor(access = AccessLevel.PACKAGE)
-public class UserIdProvider {
+public class UserProvider {
     private final UserRepository userRepository;
+
     public UUID userId() {
+        return user().id();
+    }
+
+    public LoggedUser user() {
         return ofNullable(SecurityContextHolder.getContext().getAuthentication())
                 .map(Authentication::getPrincipal)
                 .map(principal -> (org.springframework.security.core.userdetails.User) principal)
                 .flatMap(user -> userRepository.findByEmail(user.getUsername()))
-                .map(User::id)
+                .map(user -> new LoggedUser(user.id(), userRepository.isAdmin(user.id()) ? Role.ADMIN : Role.RESIDENT))
                 .orElseThrow();
     }
-
 }

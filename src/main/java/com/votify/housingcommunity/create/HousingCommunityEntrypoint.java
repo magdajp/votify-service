@@ -1,6 +1,6 @@
 package com.votify.housingcommunity.create;
 
-import com.votify.security.UserIdProvider;
+import com.votify.security.UserProvider;
 import com.votify.shared.entrypoint.FailureResponse;
 import com.votify.shared.entrypoint.SuccessResponse;
 import jakarta.validation.Valid;
@@ -20,13 +20,13 @@ import java.util.UUID;
 @RequestMapping("/api/housing-community")
 @RequiredArgsConstructor
 public class HousingCommunityEntrypoint {
-    private final UserIdProvider userIdProvider;
+    private final UserProvider userProvider;
     private final CreateHousingCommunity createHousingCommunity;
     private final FetchHousingCommunity fetchHousingCommunity;
 
     @PostMapping("/create")
     public ResponseEntity<Object> createCommunity(@Valid @RequestBody CreateCommunityRequest request) {
-        return createHousingCommunity.createHousingCommunity(request.toCommand(userIdProvider.userId()))
+        return createHousingCommunity.createHousingCommunity(request.toCommand(userProvider.userId()))
                 .mapSuccess(HousingCommunityCreated::communityId)
                 .get(SuccessResponse::created, FailureResponse::of);
     }

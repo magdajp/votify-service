@@ -1,7 +1,7 @@
 package com.votify.housingcommunity.resolution.vote;
 
 import com.votify.housingcommunity.resolution.vote.Resolution.VoteForResolutionCommand;
-import com.votify.security.UserIdProvider;
+import com.votify.security.UserProvider;
 import com.votify.shared.VoteOption;
 import com.votify.shared.entrypoint.FailureResponse;
 import com.votify.shared.entrypoint.SuccessResponse;
@@ -21,13 +21,13 @@ import java.util.UUID;
 @RequestMapping("/api/housing-community/resolution/{resolutionId}/vote")
 @RequiredArgsConstructor
 public class VoteForResolutionEntrypoint {
-    private final UserIdProvider userIdProvider;
+    private final UserProvider userProvider;
     private final VoteForResolution voteForResolution;
 
     @PutMapping
     public ResponseEntity<Object> voteForResolution(@PathVariable UUID resolutionId,
                                                     @Valid @RequestBody VoteForResolutionRequest request) {
-        return voteForResolution.voteForResolution(request.toCommand(userIdProvider.userId(), resolutionId))
+        return voteForResolution.voteForResolution(request.toCommand(userProvider.userId(), resolutionId))
                 .get(event -> SuccessResponse.empty(), FailureResponse::of);
     }
 

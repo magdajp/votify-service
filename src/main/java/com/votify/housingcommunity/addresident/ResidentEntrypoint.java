@@ -1,6 +1,6 @@
 package com.votify.housingcommunity.addresident;
 
-import com.votify.security.UserIdProvider;
+import com.votify.security.UserProvider;
 import com.votify.shared.entrypoint.FailureResponse;
 import com.votify.shared.entrypoint.SuccessResponse;
 import jakarta.validation.Valid;
@@ -19,14 +19,14 @@ import java.util.UUID;
 @RequestMapping("/api/housing-community/{communityId}/resident")
 @RequiredArgsConstructor
 public class ResidentEntrypoint {
-    private final UserIdProvider userIdProvider;
+    private final UserProvider userProvider;
     private final AddResidentToHousingCommunity addResidentToHousingCommunity;
 
     @PutMapping
     public ResponseEntity<Object> addResident(
             @PathVariable UUID communityId,
             @Valid @RequestBody AddResidentRequest request) {
-        return addResidentToHousingCommunity.addHousingCommunity(request.toCommand(communityId, userIdProvider.userId()))
+        return addResidentToHousingCommunity.addHousingCommunity(request.toCommand(communityId, userProvider.userId()))
                 .mapSuccess(HousingCommunity.UserAddedToHousingCommunity::userId)
                 .get(SuccessResponse::created, FailureResponse::of);
     }

@@ -2,7 +2,7 @@ package com.votify.housingcommunity.addresolution;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.votify.housingcommunity.addresolution.HousingCommunity.ResolutionAdded;
-import com.votify.security.UserIdProvider;
+import com.votify.security.UserProvider;
 import com.votify.shared.entrypoint.FailureResponse;
 import com.votify.shared.entrypoint.SuccessResponse;
 import jakarta.validation.Valid;
@@ -24,14 +24,14 @@ import java.util.UUID;
 @RequestMapping("/api/housing-community/{communityId}/resolution")
 @RequiredArgsConstructor
 public class AddResolutionEntrypoint {
-    private final UserIdProvider userIdProvider;
+    private final UserProvider userProvider;
     private final AddResolution addResolution;
 
     @PostMapping
     public ResponseEntity<Object> addResolution(
             @PathVariable UUID communityId,
             @Valid @RequestBody CreateResolutionRequest request) {
-        return addResolution.addResolution(request.toCommand(communityId, userIdProvider.userId()))
+        return addResolution.addResolution(request.toCommand(communityId, userProvider.userId()))
                 .mapSuccess(ResolutionAdded::resolutionId)
                 .get(SuccessResponse::created, FailureResponse::of);
     }

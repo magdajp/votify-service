@@ -1,6 +1,6 @@
 package com.votify.housingcommunity.resolution.cancel;
 
-import com.votify.security.UserIdProvider;
+import com.votify.security.UserProvider;
 import com.votify.shared.entrypoint.FailureResponse;
 import com.votify.shared.entrypoint.SuccessResponse;
 import lombok.RequiredArgsConstructor;
@@ -16,12 +16,12 @@ import java.util.UUID;
 @RequestMapping("/api/housing-community/resolution/{resolutionId}")
 @RequiredArgsConstructor
 public class CancelResolutionEntrypoint {
-    private final UserIdProvider userIdProvider;
+    private final UserProvider userProvider;
     private final CancelResolution cancelResolution;
 
     @PutMapping
     public ResponseEntity<Object> cancelResolution(@PathVariable UUID resolutionId) {
-        return cancelResolution.cancelResolution(resolutionId, userIdProvider.userId())
+        return cancelResolution.cancelResolution(resolutionId, userProvider.userId())
                 .get(resolutionCancelled -> SuccessResponse.empty(), FailureResponse::of);
     }
 }

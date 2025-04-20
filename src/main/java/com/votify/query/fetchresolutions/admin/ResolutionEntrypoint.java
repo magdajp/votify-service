@@ -1,6 +1,6 @@
 package com.votify.query.fetchresolutions.admin;
 
-import com.votify.security.UserIdProvider;
+import com.votify.security.UserProvider;
 import com.votify.shared.entrypoint.FailureResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -12,12 +12,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/housing-community/resolution")
 @RequiredArgsConstructor
 public class ResolutionEntrypoint {
-    private final UserIdProvider userIdProvider;
+    private final UserProvider userProvider;
     private final FetchResolutions fetchResolutions;
 
     @GetMapping("/all")
     public ResponseEntity<Object> fetchAll() {
-        return fetchResolutions.fetchCommunityResolutions(userIdProvider.userId())
+        return fetchResolutions.fetchCommunityResolutions(userProvider.userId())
                 .get(ResponseEntity::ok, FailureResponse::of);
     }
 }
