@@ -34,18 +34,18 @@ class HousingCommunity {
 
     Result<ResolutionAdded, Failure> addResolution(AddResolutionCommand command, Clock clock) {
         if (!ownerId.equals(command.byWho)) {
-            return Result.failure(userHasNoPermissionToAddResolution(command.byWho, command.title));
+            return Result.failure(userHasNoPermissionToAddResolution(command.byWho(), command.title()));
         }
-        if (clock.currentTime().isAfter(effectiveDeadline(command.deadline))) {
-            return Result.failure(resolutionDeadlineExceeded(command.deadline));
+        if (clock.currentTime().isAfter(effectiveDeadline(command.deadline()))) {
+            return Result.failure(resolutionDeadlineExceeded(command.deadline()));
         }
 
         var resolution = Resolution.builder()
                 .communityId(id)
-                .title(command.title)
-                .content(command.content)
-                .quorum(quorum(command.minQuorumInPercentage))
-                .deadline(command.deadline)
+                .title(command.title())
+                .content(command.content())
+                .quorum(quorum(command.minQuorumInPercentage()))
+                .deadline(command.deadline())
                 .build();
         return Result.success(new ResolutionAdded(id, resolution));
     }
@@ -82,7 +82,12 @@ class HousingCommunity {
                                        String title,
                                        String content,
                                        LocalDateTime deadline,
-                                       int minQuorumInPercentage,
+                                       Integer minQuorumInPercentage,
                                        UUID byWho) {
+
+        @Override
+        public Integer minQuorumInPercentage() {
+            return minQuorumInPercentage == null ? 50 : minQuorumInPercentage;
+        }
     }
 }

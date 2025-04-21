@@ -6,8 +6,6 @@ import com.votify.security.UserProvider;
 import com.votify.shared.entrypoint.FailureResponse;
 import com.votify.shared.entrypoint.SuccessResponse;
 import jakarta.validation.Valid;
-import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -39,8 +37,7 @@ public class AddResolutionEntrypoint {
     public record CreateResolutionRequest(
             @NotNull(message = "Title is required") String title,
             @NotNull(message = "Content is required") String content,
-            @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm") @NotNull(message = "Deadline is required") LocalDateTime deadline,
-            @NotNull(message = "Quorum in percentage is required") @Min(1) @Max(100) int minQuorumInPercentage) {
+            @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm") @NotNull(message = "Deadline is required") LocalDateTime deadline) {
 
         private HousingCommunity.AddResolutionCommand toCommand(UUID communityId, UUID byWho) {
             return HousingCommunity.AddResolutionCommand
@@ -49,7 +46,6 @@ public class AddResolutionEntrypoint {
                     .title(title)
                     .content(content)
                     .deadline(deadline)
-                    .minQuorumInPercentage(minQuorumInPercentage)
                     .byWho(byWho)
                     .build();
         }
