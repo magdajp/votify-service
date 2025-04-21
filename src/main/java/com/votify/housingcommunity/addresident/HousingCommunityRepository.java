@@ -1,6 +1,7 @@
 package com.votify.housingcommunity.addresident;
 
 import com.goodcode.online.result.Result;
+import com.votify.housingcommunity.addresident.HousingCommunity.UserAddedToHousingCommunity;
 import com.votify.shared.Email;
 import com.votify.shared.result.Failure;
 import com.votify.shared.result.NotFoundFailure;
@@ -46,23 +47,44 @@ class HousingCommunityRepository {
     private final NamedParameterJdbcTemplate jdbcTemplate;
 
     @Transactional
-    public void persist(HousingCommunity.UserAddedToHousingCommunity event) {
-        jdbcTemplate.update(ADD_USER_QUERY,
-                Map.of(
-                        "id", event.user().id(),
-                        "firstName", event.user().firstName(),
-                        "lastName", event.user().lastName(),
-                        "email", event.user().email().value(),
-                        "password", event.user().password()
-                )
-        );
+    public Result<UserAddedToHousingCommunity, Failure> persist(UserAddedToHousingCommunity event) {
+        try {
+            return createUser(event)
+                    .flatSuccess(this::addToCommunity);
+        } catch (Exception e) {
+            return Result.failure(userOfEmailAddressAlreadyExists(event.user().email()));
+        }
+    }
 
-        jdbcTemplate.update(UPDATE_COMMUNITY_QUERY,
-                Map.of(
-                        "userId", event.user().id(),
-                        "housingCommunityId", event.housingCommunityId()
-                )
-        );
+    private Result<UserAddedToHousingCommunity, Failure> addToCommunity(UserAddedToHousingCommunity event) {
+        try {
+            jdbcTemplate.update(UPDATE_COMMUNITY_QUERY,
+                    Map.of(
+                            "userId", event.user().id(),
+                            "housingCommunityId", event.housingCommunityId()
+                    )
+            );
+            return Result.success(event);
+        } catch (Exception e) {
+            return Result.failure(userOfEmailAddressAlreadyPartOfCommunity(event.user().email()));
+        }
+    }
+
+    private Result<UserAddedToHousingCommunity, Failure> createUser(UserAddedToHousingCommunity event) {
+        try {
+            jdbcTemplate.update(ADD_USER_QUERY,
+                    Map.of(
+                            "id", event.user().id(),
+                            "firstName", event.user().firstName(),
+                            "lastName", event.user().lastName(),
+                            "email", event.user().email().value(),
+                            "password", event.user().password()
+                    )
+            );
+            return Result.success(event);
+        } catch (Exception e) {
+            return Result.failure(userOfEmailAddressAlreadyExists(event.user().email()));
+        }
     }
 
     Result<HousingCommunity, Failure> fetchById(UUID communityId) {
@@ -111,5 +133,13 @@ class HousingCommunityRepository {
 
     private static Failure communityDoesNotExistFailure(UUID communityId) {
         return (NotFoundFailure) () -> "Housing community[%s] does not exist".formatted(communityId);
+    }
+
+    private static Failure userOfEmailAddressAlreadyExists(Email email) {
+        return () -> "User[%s] already exist".formatted(email);
+    }
+
+    private static Failure userOfEmailAddressAlreadyPartOfCommunity(Email email) {
+        return () -> "User[%s] already exists in community".formatted(email);
     }
 }

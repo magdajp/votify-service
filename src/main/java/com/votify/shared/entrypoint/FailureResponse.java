@@ -15,6 +15,10 @@ public class FailureResponse {
         if (failure instanceof NotFoundFailure) {
             return ResponseEntity.status(NOT_FOUND).body(failure.message());
         }
-        return ResponseEntity.badRequest().body(failure.message());
+        return ResponseEntity.badRequest().body(new FailureResponseDto(failure.message()));
+    }
+
+    public record FailureResponseDto(String message) {
+
     }
 }

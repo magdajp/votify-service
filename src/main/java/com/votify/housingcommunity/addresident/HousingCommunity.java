@@ -21,7 +21,7 @@ class HousingCommunity {
             return Result.failure(userHasNoPermissionToAddResident(user.id(), byWho));
         }
         if (!residents.add(user.email())) {
-            return Result.failure(userIsAlreadyAddedToCommunity(user.id(), id));
+            return Result.failure(userIsAlreadyAddedToCommunity(user.email(), id));
         }
         return Result.success(new UserAddedToHousingCommunity(user, id));
     }
@@ -41,7 +41,7 @@ class HousingCommunity {
         return () -> "User[%s] has no permission to add resident[%s] to community[%s]".formatted(byWho, residentId, id);
     }
 
-    private Failure userIsAlreadyAddedToCommunity(UUID userId, UUID communityId) {
-        return () -> "User[%s] is already added to community[%s]".formatted(userId, communityId);
+    private Failure userIsAlreadyAddedToCommunity(Email userEmail, UUID communityId) {
+        return () -> "User[%s] is already added to community[%s]".formatted(userEmail, communityId);
     }
 }
