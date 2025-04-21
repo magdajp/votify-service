@@ -17,4 +17,5 @@ spring:
     change-log: classpath:db/changelog/db.changelog-master.yml
     enabled: true
     contexts: prod
-
+cors:
+  allowed-origins:  ${CORS_ALLOWED_ORIGINS:http://localhost:5173}
