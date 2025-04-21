@@ -1,5 +1,6 @@
 package com.votify.security;
 
+import lombok.Builder;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,10 +17,24 @@ class UserDetailsEntrypoint {
     @GetMapping
     public DetailsResponse details() {
         var user = userProvider.user();
-        return new DetailsResponse(user.email(), user.role().name(), user.communityId(), user.communityName());
+        return DetailsResponse.builder()
+                .email(user.email())
+                .firstName(user.firstName())
+                .lastName(user.lastName())
+                .role(user.role().name())
+                .communityId(user.communityId())
+                .communityName(user.communityName())
+                .build();
+
     }
 
-    public record DetailsResponse(String email, String role, UUID communityId, String communityName) {
+    @Builder
+    public record DetailsResponse(String email,
+                                  String firstName,
+                                  String lastName,
+                                  String role,
+                                  UUID communityId,
+                                  String communityName) {
 
     }
 }

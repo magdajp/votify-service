@@ -34,6 +34,8 @@ public class UserProvider {
         return LoggedUser.builder()
                 .id(user.id())
                 .email(user.email())
+                .firstName(user.firstName())
+                .lastName(user.lastName())
                 .communityId(community.id())
                 .communityName(community.name())
                 .role(community.roleInCommunity(user.id()))
